@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #674d3911;
+    /* Couleur de fond beige clair */
+}
+
+#quiz-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 1300px;
+    /* Conteneur plus large */
+    height: 1000px;
+    overflow-y: auto;
+    max-height: 80vh;
+    /* Hauteur maximale pour activer le scroll */
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.questionnaire-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #6d4c41;
+    /* Marron clair */
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.questionnaire-info .date {
+    font-style: italic;
+    color: #ffccbc;
+    /* Couleur de texte claire */
+}
+
+.score-total {
+    font-weight: bold;
+    background-color: #8d6e63;
+    /* Couleur pour le score total */
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #6d4c41;
+    /* Bordure marron */
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #6d4c41;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(192, 175, 178, 0.61);
+    /* Lignes paires beige clair */
+}
+
+tr:hover {
+    background-color: #d7ccc8;
+    /* Effet au survol des lignes */
+}
+
+.total {
+    font-weight: bold;
+    background-color: #8d6e63;
+    /* Ligne de total marron */
+    color: white;
+}
+
+/* Style du conteneur du bouton */
+.back-home {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Style du bouton */
+.back-home a.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4e4c4c;
+    /* Couleur de fond */
+    color: #fff;
+    /* Couleur du texte */
+    font-size: 16px;
+    /* Taille du texte */
+    border-radius: 5px;
+    /* Bordures arrondies */
+    text-decoration: none;
+    /* Supprimer le soulignement du lien */
+}
+
+/* Style au survol du bouton */
+.back-home a.btn:hover {
+    background-color: #454343;
+    /* Changement de couleur de fond au survol */
+    cursor: pointer;
+    /* Curseur de la souris en main */
+}
+
+.selection-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+.selection-container select {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

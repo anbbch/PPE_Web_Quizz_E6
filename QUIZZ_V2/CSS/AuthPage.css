@@ -1,0 +1,141 @@
+body {
+    background-color: #674d3911;
+    margin: 0; /* Supprimer les marges par défaut */
+}
+
+.conteneur img {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    max-width: 10%;
+    max-height: 80%;
+    border-radius: 15px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    aspect-ratio: 3/2;
+}
+
+.form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #454343;
+    opacity: 0.9;
+    box-shadow: inset -4px -4px 8px #262554d1;
+    border-radius: 8px;
+    width: 400px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#configForm {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+#en-tete {
+    margin-top: 55px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.form-input {
+    transition: all 0.2s ease-in-out;
+    width: 250px;
+    height: 30px;
+    color: rgba(255, 255, 255, 1); /* Assurez-vous que la couleur est complètement opaque */
+    font-weight: 400;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.979);
+    margin: 15px;
+    position: relative;
+    background: transparent;
+    outline: none;
+}
+
+
+.form-input:focus {
+    border-bottom: 1px solid #ffffff;
+    background-color: transparent;
+}
+
+.form-button {
+    background-color: #f4f4f4;
+    border: #333 2px solid;
+    color: #333;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+    margin-top: 35px;
+    width: 150px;
+    display: flex;
+    justify-content: center; /* Centrer le texte horizontalement */
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-button:hover {
+    background-color: #cdd2e2;
+    color: black;
+    border: 1px solid #fff;
+}
+
+/* Style du conteneur du bouton */
+.back-home {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Style du bouton */
+.back-home a.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4e4c4c; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    font-size: 16px; /* Taille du texte */
+    border-radius: 5px; /* Bordures arrondies */
+    text-decoration: none; /* Supprimer le soulignement du lien */
+}
+
+/* Style au survol du bouton */
+.back-home a.btn:hover {
+    background-color: #454343; /* Changement de couleur de fond au survol */
+    cursor: pointer; /* Curseur de la souris en main */
+}
+
+#small{
+    text-align: center;
+    padding: 20px;
+    color:white;
+}
+
+a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et l'input */
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="text"] {
+    flex: 1; /* Prend tout l'espace restant */
+}
+

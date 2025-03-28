@@ -1,0 +1,253 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #674d3911;
+}
+
+#quiz-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 800px;
+  height: auto;
+}
+
+/* #timer {
+  margin-right: 500px;
+  margin-bottom: 20px;
+  font-weight: 800;
+} */
+
+/****  NOUVEAU  *****/
+#Global {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/******************************/
+@media (max-width: 768px) {
+  .logout-container {
+    margin-top: auto;
+  }
+
+  .disconnect-btn {
+    width: 100%;
+    /*background-color: #262554;
+    border: #202048 2px solid; 
+    color: #f9f9f9;*/
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* Supprimer le soulignement par défaut */
+    text-align: center;
+
+    margin-left: 900px;
+  }
+
+  .disconnect-btn:hover {
+    /* background-color: #262554; */
+    color: white;
+    border: 1px solid #fff;
+  }
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #452c19ad;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+#next-button {
+  justify-content: center;
+  align-items: center;
+  width: 590px;
+  margin-top: 20px;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+#answers-container {
+  margin: 20px 0;
+}
+.correct-answer {
+  background-color: #4caf50; /* Vert pour la bonne réponse */
+  color: white;
+}
+
+#question-number {
+  margin-left: 550px;
+  margin-top: -95px;
+  margin-bottom: 80px;
+}
+
+#feedback {
+  font-weight: bolder;
+  margin-top: 10px;
+}
+
+#feedback.correct {
+  color: green;
+}
+#feedback.wrong {
+  color: red;
+}
+.menu-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.menu-button {
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.menu-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-dropdown a:last-child {
+    border-bottom: none;
+}
+
+.menu-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.theme-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.subject-button {
+  flex-grow: 1;
+}
+
+.edit-button, .delete-button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+#theme-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px black;
+  display: none;
+}
+
+.new-questionnaire-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-questionnaire-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Style du conteneur du bouton */
+.back-home {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Style du bouton */
+.back-home a.btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4e4c4c; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  font-size: 16px; /* Taille du texte */
+  border-radius: 5px; /* Bordures arrondies */
+  text-decoration: none; /* Supprimer le soulignement du lien */
+}
+
+/* Style au survol du bouton */
+.back-home a.btn:hover {
+  background-color: #454343; /* Changement de couleur de fond au survol */
+  cursor: pointer; /* Curseur de la souris en main */
+}

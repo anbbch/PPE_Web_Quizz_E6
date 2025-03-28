@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #674d3911;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #6B4226;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #FAF0E6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header */
+thead {
+    background-color: #8B5E3B;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #D2B48C;
+}
+
+tr:nth-child(even) {
+    background-color: #E3C6A0;
+}
+
+tr:hover {
+    background-color: #D2A679;
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+    margin: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-danger {
+    background-color: #B22222;
+}
+
+.btn-danger:hover {
+    background-color: #8B0000;
+}
+
+.btn-secondary {
+    background-color: #6B4226;
+}
+
+.btn-secondary:hover {
+    background-color: #4F2D1A;
+}
+/* 
+/* Back button
+a.btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #8B5E3B;
+    padding: 10px 20px;
+}
+
+a.btn:hover {
+    background-color: #6B4226;
+} */
+
+/* Style du conteneur du bouton */
+.back-home {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Style du bouton */
+.back-home a.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4e4c4c;
+    /* Couleur de fond */
+    color: #fff;
+    /* Couleur du texte */
+    font-size: 16px;
+    /* Taille du texte */
+    border-radius: 5px;
+    /* Bordures arrondies */
+    text-decoration: none;
+    /* Supprimer le soulignement du lien */
+}
+
+/* Style au survol du bouton */
+.back-home a.btn:hover {
+    background-color: #454343;
+    /* Changement de couleur de fond au survol */
+    cursor: pointer;
+    /* Curseur de la souris en main */
+}
