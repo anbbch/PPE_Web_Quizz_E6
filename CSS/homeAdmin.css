@@ -1,0 +1,373 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #674d3911;
+}
+
+/*** NOUVEAU ****/
+#Global {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/******************************/
+@media (max-width: 868px) {
+  .logout-container {
+    margin-top: auto;
+  }
+
+  .disconnect-btn {
+    width: 100%;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .disconnect-btn:hover {
+    color: white;
+    border: 1px solid #fff;
+  }
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #452c19ad;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Positionnement du menu */
+.menu-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.menu-button {
+  background-color: #333;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: medium;
+  border-radius: 5px;
+}
+
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.menu-dropdown a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-dropdown a:last-child {
+  border-bottom: none;
+}
+
+.menu-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.edit-button,
+.delete-button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style du conteneur du bouton */
+.back-home {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Style du bouton */
+.back-home a.btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4e4c4c; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  font-size: 16px; /* Taille du texte */
+  border-radius: 5px; /* Bordures arrondies */
+  text-decoration: none; /* Supprimer le soulignement du lien */
+}
+
+/* Style au survol du bouton */
+.back-home a.btn:hover {
+  background-color: #454343; /* Changement de couleur de fond au survol */
+  cursor: pointer; /* Curseur de la souris en main */
+}
+
+/* Style global du tableau de bord */
+.dashboard-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: auto;
+  max-height: 80%; /* Limite maximale */
+}
+
+/* Titres du dashboard */
+.dashboard-container h1 {
+  font-size: medium;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+canvas {
+    width: 30% !important;
+    max-width: 600px; /* Limite maximale */
+    height: 200px !important;
+    max-height: 400px; /* Limite maximale */
+    display: block;
+    margin: 0 auto;
+  }
+
+/* Container des graphiques */
+.charts-container {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+/* Container des graphiques */
+.charts-container h2 {
+    font-size: medium;
+  }
+
+
+
+/* Liste des utilisateurs */
+.top-users ul {
+  list-style: none;
+  padding: 0;
+}
+
+.top-users li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.top-users li:last-child {
+  border-bottom: none;
+}
+
+.top-users h2 {
+  font-size: medium;
+  color: #333;
+}
+
+/* Section pour les thèmes */
+#quiz-container {
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 400px;
+}
+
+#quiz-container h1 {
+  font-size: medium;
+  color: #333;
+  text-align: center;
+}
+
+/* Section de sélection des thèmes */
+#subject-selection h2 {
+  font-size: medium;
+  color: #333;
+}
+
+.theme-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.subject-button {
+  width: 90%;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.subject-button:hover {
+  background-color: #333;
+}
+
+.delete-button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #dc3545;
+  color: white;
+  font-size: small;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Popup pour la création d'un nouveau thème */
+#theme-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: none;
+  z-index: 1000;
+}
+
+#theme-popup h2 {
+  font-size: medium;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#theme-popup input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: medium;
+}
+
+#theme-popup button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  font-size: medium;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#theme-popup button:hover {
+  background-color: #218838;
+}
+
+/* Overlay pour le popup */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
+}
+
+/* Bouton de création de questionnaire */
+.new-questionnaire-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 15px;
+  font-size: medium;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-questionnaire-button:hover {
+  background-color: #0056b3;
+}
+
+/* Menu Statistiques */
+.submenu {
+  position: relative;
+}
+
+.submenu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.submenu a:hover {
+  background-color: #f1f1f1;
+}
+
+.submenu-dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  border-radius: 5px;
+}
+
+.submenu:hover .submenu-dropdown {
+  display: block;
+}
+
+.submenu-dropdown a {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.submenu-dropdown a:hover {
+  background-color: #ddd;
+}
