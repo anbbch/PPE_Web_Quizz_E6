@@ -107,8 +107,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/quizz.css">
+    <link rel="stylesheet" href="../CSS/homeAdmin.css">
     <title>Dashboard Admin</title>
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         function openPopup() {
@@ -139,6 +141,15 @@ $conn->close();
             <a href="settings/historique.php">Historique</a>
             <a href="settings/createAdmin.php">Créer un utilisateur</a>
             <a href="settings/manageUsers.php">Manage</a>
+            <!-- Nouveau Menu Statistiques avec 3 sous-menus -->
+            <div class="submenu">
+                <a href="#">Statistiques</a>
+                <div class="submenu-dropdown">
+                    <a href="statistiques.php">Score par Groupe</a>
+                    <a href="topQuestionnaires.php">Top Questionnaires</a>
+                    <a href="topUsers.php">Top Utilisateurs</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="dashboard-container">
@@ -158,37 +169,40 @@ $conn->close();
                 <?php } ?>
             </ul>
         </div>
-    </div>
-
-    <div id="quiz-container">
-        <h1>Quiz Interactif</h1>
-        <div id="subject-selection">
-            <h2>Choisissez un thème :</h2>
-            <?php foreach ($themes as $theme): ?>
-                <div class="theme-item">
-                    <button class="subject-button" onclick="window.location.href='questionnaire.php?theme=<?= $theme['id'] ?>'">
-                        <?= htmlspecialchars($theme['name']) ?>
-                    </button>
-                    <form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce thème ?');">
-                        <input type="hidden" name="theme_id" value="<?= $theme['id'] ?>">
-                        <button type="submit" name="delete_theme" class="delete-button">Supprimer</button>
-                    </form>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <button onclick="document.getElementById('theme-popup').style.display='block'">Créer un nouveau thème</button>
-        <div id="theme-popup">
-            <h2>Créer un nouveau thème</h2>
-            <form method="post">
-                <input type="text" name="theme_name" placeholder="Nom du thème" required>
-                <button type="submit" name="add_theme">Créer</button>
-                <button type="button" onclick="document.getElementById('theme-popup').style.display='none'">Annuler</button>
-            </form>
+        <div id="quiz-container">
+            <h1>Quiz Interactif</h1>
+            <div id="subject-selection">
+                <h2>Choisissez un thème :</h2>
+                <?php foreach ($themes as $theme): ?>
+                    <div class="theme-item">
+                        <button class="subject-button" onclick="window.location.href='questionnaire.php?theme=<?= $theme['id'] ?>'">
+                            <?= htmlspecialchars($theme['name']) ?>
+                        </button>
+                        <form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce thème ?');">
+                            <input type="hidden" name="theme_id" value="<?= $theme['id'] ?>">
+                            <button type="submit" name="delete_theme" class="delete-button">Supprimer</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button onclick="document.getElementById('theme-popup').style.display='block'">Créer un nouveau thème</button>
+            <div id="theme-popup">
+                <h2>Créer un nouveau thème</h2>
+                <form method="post">
+                    <input type="text" name="theme_name" placeholder="Nom du thème" required>
+                    <button type="submit" name="add_theme">Créer</button>
+                    <button type="button" onclick="document.getElementById('theme-popup').style.display='none'">Annuler</button>
+                </form>
+            </div>            
         </div>
     </div>
 
-    <script>
+    
+
+    
+
+</body>
+<script>
         document.addEventListener("DOMContentLoaded", function() {
             const menuButton = document.querySelector(".menu-button");
             const menuDropdown = document.querySelector(".menu-dropdown");
@@ -243,7 +257,5 @@ $conn->close();
             });
         });
     </script>
-
-</body>
 
 </html>
