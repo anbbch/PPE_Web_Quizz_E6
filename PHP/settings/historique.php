@@ -1,8 +1,9 @@
 <?php
 require_once '../../config.php';
+include '../menu.php';
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../login.php");
+    header("Location: ../../../login.php");
     exit();
 }
 
@@ -62,6 +63,7 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historique des Réponses</title>
     <link rel="stylesheet" href="../../CSS/historique.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -130,9 +132,6 @@ $result = $stmt->get_result();
         $stmt->close();
         $conn->close();
         ?>
-    </div>
-    <div class="back-home">
-        <a href="<?= $is_admin ? '../homeAdmin.php' : '../homeUser.php' ?>" class="btn btn-secondary">Menu</a>
     </div>
 </body>
 

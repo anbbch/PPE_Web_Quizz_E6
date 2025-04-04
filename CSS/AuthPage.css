@@ -1,5 +1,5 @@
 body {
-    background-color: #674d3911;
+    background-color: #674d3911 !important;
     margin: 0; /* Supprimer les marges par défaut */
 }
 
@@ -72,13 +72,13 @@ body {
     background-color: #f4f4f4;
     border: #333 2px solid;
     color: #333;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 4px;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
     cursor: pointer;
-    height: 40px;
-    margin-top: 35px;
-    width: 150px;
+    height: 40px !important;
+    margin-top: 35px !important;
+    width: 150px !important;
     display: flex;
     justify-content: center; /* Centrer le texte horizontalement */
     align-items: center;

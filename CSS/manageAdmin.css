@@ -1,79 +1,87 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #674d3911;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #674d3911 !important;
+  margin: 0;
+  padding: 0;
+  text-align: center !important;
 }
 
 h2 {
-    color: #6B4226;
-    font-size: 24px;
-    margin-bottom: 20px;
+  color: #6b4226;
+  font-size: 24px;
+  margin-bottom: 1%;
+  margin-top: 2% !important;
 }
 
+select{
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    margin-top: 5% !important;
+}
 /* Table styling */
 table {
-    width: 80%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #FAF0E6;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80% !important;
+  margin: 0 auto !important;
+  border-collapse: collapse !important;
+  background-color: #faf0e6 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+  overflow-y: auto;
 }
 
 /* Table header */
 thead {
-    background-color: #8B5E3B;
-    color: white;
+  background-color: #8b5e3b;
+  color: white;
 }
 
-th, td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #D2B48C;
+th,
+td {
+  padding: 10px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #d2b48c;
 }
 
 tr:nth-child(even) {
-    background-color: #E3C6A0;
+  background-color: #e3c6a0;
 }
 
 tr:hover {
-    background-color: #D2A679;
-    color: white;
+  background-color: #d2a679;
+  color: white;
 }
 
 /* Buttons */
 .btn {
-    padding: 8px 12px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 14px;
-    display: inline-block;
-    margin: 5px;
-    transition: background 0.3s ease-in-out;
+  padding: 5px 12px !important;
+  text-decoration: none !important;
+  color: white ;
+  margin: 4px !important;
+  border-radius: 5px !important;;
+  display: inline-block !important;
+  transition: background 0.3s ease-in-out !important;
 }
 
 .btn:hover {
-    opacity: 0.8;
+  opacity: 0.8 !important;
 }
 
 .btn-danger {
-    background-color: #B22222;
+  background-color: #b22222 !important;
 }
 
 .btn-danger:hover {
-    background-color: #8B0000;
+  background-color: #8b0000 !important;
 }
 
 .btn-secondary {
-    background-color: #6B4226;
+  background-color: #6b4226 !important;
 }
 
 .btn-secondary:hover {
-    background-color: #4F2D1A;
+  background-color: #4f2d1a !important;
 }
 /* 
 /* Back button
@@ -87,34 +95,3 @@ a.btn {
 a.btn:hover {
     background-color: #6B4226;
 } */
-
-/* Style du conteneur du bouton */
-.back-home {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-/* Style du bouton */
-.back-home a.btn {
-    padding: 10px 20px;
-    border: none;
-    background-color: #4e4c4c;
-    /* Couleur de fond */
-    color: #fff;
-    /* Couleur du texte */
-    font-size: 16px;
-    /* Taille du texte */
-    border-radius: 5px;
-    /* Bordures arrondies */
-    text-decoration: none;
-    /* Supprimer le soulignement du lien */
-}
-
-/* Style au survol du bouton */
-.back-home a.btn:hover {
-    background-color: #454343;
-    /* Changement de couleur de fond au survol */
-    cursor: pointer;
-    /* Curseur de la souris en main */
-}

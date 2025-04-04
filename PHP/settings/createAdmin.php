@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // create_user.php
 require_once '../../config.php';
-
+include '../menu.php';
 
 
 // Check if user is authenticated and is admin
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Create User</title>
     <link rel="stylesheet" href="../../CSS/AuthPage.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Media/sodexo.ico">
 </head>
 
@@ -91,10 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="form-button">Create User</button>
             </form>
         </div>
-    </div>
-
-    <div class="back-home">
-        <a href="<?= $is_admin ? '../homeAdmin.php' : '../homeUser.php' ?>" class="btn btn-secondary">Menu</a>
     </div>
 </body>
 

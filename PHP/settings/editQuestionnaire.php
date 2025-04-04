@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../../config.php';
+include '../menu.php';
 
 // Vérifier si l'utilisateur est authentifié et administrateur
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['status'] !== 'Administrator') {
@@ -33,12 +34,15 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Éditer les Questionnaires</title>
     <link rel="stylesheet" href="../CSS/quizz.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <h1>Gestion des Questionnaires</h1>
@@ -65,4 +69,5 @@ $conn->close();
         </table>
     </div>
 </body>
+
 </html>
