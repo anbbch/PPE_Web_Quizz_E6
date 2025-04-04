@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // create_user.php
 require_once '../../config.php';
+include '../menu.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -39,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Create User</title>
     <link rel="stylesheet" href="../../CSS/AuthPage.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Media/sodexo.ico">
 </head>
 

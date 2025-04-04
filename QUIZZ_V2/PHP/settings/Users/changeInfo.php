@@ -1,9 +1,11 @@
 <?php
 require_once '../../../config.php';
 
+include '../../menu.php';
+
 // Vérifier si l'utilisateur est authentifié
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../login.php");
+    header("Location: ../../../login.php");
     exit();
 }
 
@@ -28,9 +30,11 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Change Information</title>
     <link rel="stylesheet" href="../../../CSS/AuthPage.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
         function toggleFields() {
             document.getElementById("new_username").disabled = !document.getElementById("change_username").checked;
@@ -59,8 +63,6 @@ $conn->close();
             </form>
         </div>
     </div>
-    <div class="back-home">
-        <a href="<?= $is_admin ? '../../homeAdmin.php' : '../../homeUser.php' ?>" class="btn btn-secondary">Menu</a>
-    </div>
 </body>
+
 </html>

@@ -2,21 +2,27 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  background-color: #674d3911;
+  height: 100vh;
+  background-color: #674d3911 !important;
+}
+
+.navbar {
+  color: #fff;
+  padding: 0px;
+  position: relative;
+  width: 100%;
+  top: 0;
 }
 
 #quiz-container {
-  background: #fff;
+  background: #674d3911;
   padding: 20px;
+  margin: 10% auto; /* Centrer et ajouter un espace avec la navbar */
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 800px;
-  height: auto;
+  max-width: 90%;
 }
 
 /* #timer {
@@ -30,7 +36,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #f0f0f0;
+  background-color: #674d3911;
   padding: 5px 10px;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -114,48 +120,9 @@ button:disabled {
   color: red;
 }
 .menu-container {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-.menu-button {
-    background-color: #333;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.menu-dropdown {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    min-width: 200px;
-    z-index: 1000;
-    border-radius: 5px;
-}
-
-.menu-dropdown a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    border-bottom: 1px solid #ddd;
-}
-
-.menu-dropdown a:last-child {
-    border-bottom: none;
-}
-
-.menu-dropdown a:hover {
-    background-color: #f1f1f1;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 .theme-item {
@@ -169,7 +136,8 @@ button:disabled {
   flex-grow: 1;
 }
 
-.edit-button, .delete-button {
+.edit-button,
+.delete-button {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
@@ -196,14 +164,17 @@ button:disabled {
 
 #overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: none;
 }
 #theme-popup {
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
@@ -216,7 +187,7 @@ button:disabled {
   margin: 20px auto;
   padding: 10px 15px;
   font-size: 16px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -226,7 +197,6 @@ button:disabled {
 .new-questionnaire-button:hover {
   background-color: #0056b3;
 }
-
 
 /* Style du conteneur du bouton */
 .back-home {

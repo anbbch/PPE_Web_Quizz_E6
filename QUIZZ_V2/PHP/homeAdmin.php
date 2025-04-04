@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../config.php';
+include 'menu.php';
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header("Location: ../login.php");
@@ -93,7 +94,7 @@ $sql = "SELECT u.username, SUM(h.score) AS total_score
         FROM historiqueUtilisateur h
         JOIN users u ON h.user_id = u.id
         GROUP BY u.id
-        ORDER BY total_score DESC LIMIT 3";
+        ORDER BY total_score DESC LIMIT 4";
 $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     $topUsers[] = $row;
@@ -107,155 +108,141 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/homeAdmin.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/homeAdmin_copy.css">
     <title>Dashboard Admin</title>
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        function openPopup() {
-            document.getElementById("theme-popup").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("theme-popup").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        function confirmDelete() {
-            return confirm("Voulez-vous vraiment supprimer ce thème ?");
-        }
-    </script>
 </head>
 
 <body>
-    <div class="menu-container">
-        <button class="menu-button">☰ Menu</button>
-        <div class="menu-dropdown">
-            <form method="post">
-                <button type="submit" class="disconnect-btn" name="logout">Logout</button>
-            </form>
-            <a href="settings/Users/changePassword.php">Changer de mot de passe</a>
-            <a href="settings/Users/changeInfo.php">Changer ses infos</a>
-            <a href="settings/historique.php">Historique</a>
-            <a href="settings/createAdmin.php">Créer un utilisateur</a>
-            <a href="settings/manageUsers.php">Manage</a>
-            <!-- Nouveau Menu Statistiques avec 3 sous-menus -->
-            <div class="submenu">
-                <a href="#">Statistiques</a>
-                <div class="submenu-dropdown">
-                    <a href="statistiques.php">Score par Groupe</a>
-                    <a href="topQuestionnaires.php">Top Questionnaires</a>
-                    <a href="topUsers.php">Top Utilisateurs</a>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Tableau de bord Admin</h1>
+
+        <div class="row">
+            <!-- Progression des Scores -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-brown text-white">
+                        <h4>Progression des Scores par Groupe</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Questionnaires -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-brown text-white">
+                        <h4>Top Questionnaires par Groupe</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="quizChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 3 Utilisateurs -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-brown text-white">
+                        <h4>Top 3 Utilisateurs</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <?php foreach ($topUsers as $user) { ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <?= htmlspecialchars($user['username']) ?>
+                                    <span class="badge badge-primary badge-pill"><?= $user['total_score'] ?></span>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestion des Thèmes -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-brown text-white">
+                        <h4>Gestion des Thèmes</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <?php foreach ($themes as $theme): ?>
+                                <div class="theme-item d-flex justify-content-between align-items-center">
+                                    <button class="subject-button" onclick="window.location.href='questionnaire.php?theme=<?= $theme['id'] ?>'">
+                                        <?= htmlspecialchars($theme['name']) ?>
+                                    </button>
+                                    <form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce thème ?');">
+                                        <input type="hidden" name="theme_id" value="<?= $theme['id'] ?>">
+                                        <button type="submit" name="delete_theme" class="delete-button btn btn-danger">Supprimer</button>
+                                    </form>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="dashboard-container">
-        <h1>Tableau de bord</h1>
-        <div class="charts-container">
-            <h2>Progression des Scores par Groupe</h2>
-            <canvas id="scoreChart"></canvas>
-
-            <h2>Top Questionnaires par Groupe</h2>
-            <canvas id="quizChart"></canvas>
-        </div>
-        <div class="top-users">
-            <h2>Top 3 Utilisateurs</h2>
-            <ul>
-                <?php foreach ($topUsers as $user) { ?>
-                    <li><?= htmlspecialchars($user['username']) ?> - Score: <?= $user['total_score'] ?></li>
-                <?php } ?>
-            </ul>
-        </div>
-        <div id="quiz-container">
-            <h1>Quiz Interactif</h1>
-            <div id="subject-selection">
-                <h2>Choisissez un thème :</h2>
-                <?php foreach ($themes as $theme): ?>
-                    <div class="theme-item">
-                        <button class="subject-button" onclick="window.location.href='questionnaire.php?theme=<?= $theme['id'] ?>'">
-                            <?= htmlspecialchars($theme['name']) ?>
-                        </button>
-                        <form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce thème ?');">
-                            <input type="hidden" name="theme_id" value="<?= $theme['id'] ?>">
-                            <button type="submit" name="delete_theme" class="delete-button">Supprimer</button>
-                        </form>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <button onclick="document.getElementById('theme-popup').style.display='block'">Créer un nouveau thème</button>
-            <div id="theme-popup">
-                <h2>Créer un nouveau thème</h2>
-                <form method="post">
-                    <input type="text" name="theme_name" placeholder="Nom du thème" required>
-                    <button type="submit" name="add_theme">Créer</button>
-                    <button type="button" onclick="document.getElementById('theme-popup').style.display='none'">Annuler</button>
-                </form>
-            </div>            
-        </div>
-    </div>
-
-    
-
-    
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuButton = document.querySelector(".menu-button");
-            const menuDropdown = document.querySelector(".menu-dropdown");
+    
 
-            menuButton.addEventListener("click", function(event) {
-                event.stopPropagation(); // Empêche la propagation pour éviter de fermer immédiatement
-                menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
-            });
+    document.addEventListener("DOMContentLoaded", function() {
+        let scoreData = <?php echo json_encode($scoreParGroupe); ?>;
+        let labels = [...new Set(Object.values(scoreData).flat().map(item => item.date))];
+        let datasets = Object.keys(scoreData).map(group => ({
+            label: group,
+            data: labels.map(date => {
+                let found = scoreData[group].find(entry => entry.date === date);
+                return found ? found.score : 0;
+            }),
+            borderColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
+            fill: false
+        }));
 
-            document.addEventListener("click", function(event) {
-                if (!menuButton.contains(event.target) && !menuDropdown.contains(event.target)) {
-                    menuDropdown.style.display = "none";
-                }
-            });
+        new Chart(document.getElementById("scoreChart"), {
+            type: 'line',
+            data: {
+                labels,
+                datasets
+            },
+            options: {
+                responsive: true
+            }
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            let scoreData = <?php echo json_encode($scoreParGroupe); ?>;
-            let labels = [...new Set(Object.values(scoreData).flat().map(item => item.date))];
-            let datasets = Object.keys(scoreData).map(group => ({
-                label: group,
-                data: labels.map(date => {
-                    let found = scoreData[group].find(entry => entry.date === date);
-                    return found ? found.score : 0;
-                }),
-                borderColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
-                fill: false
-            }));
-
-            new Chart(document.getElementById("scoreChart"), {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets
-                },
-                options: {
-                    responsive: true
-                }
-            });
-
-            let quizData = <?php echo json_encode($topQuestionnaires); ?>;
-            new Chart(document.getElementById("quizChart"), {
-                type: 'bar',
-                data: {
-                    labels: quizData.map(q => q.libelle + ' (' + q.group_name + ')'),
-                    datasets: [{
-                        label: 'Score Moyen',
-                        data: quizData.map(q => q.avg_score),
-                        backgroundColor: 'blue'
-                    }]
-                }
-            });
+        let quizData = <?php echo json_encode($topQuestionnaires); ?>;
+        new Chart(document.getElementById("quizChart"), {
+            type: 'bar',
+            data: {
+                labels: quizData.map(q => q.libelle + ' (' + q.group_name + ')'),
+                datasets: [{
+                    label: 'Score Moyen',
+                    data: quizData.map(q => q.avg_score),
+                    backgroundColor: 'blue'
+                }]
+            }
         });
-    </script>
+    });
+
+
+    window.addEventListener('resize', function() {
+        const chart = document.getElementById('quizChart');
+        if (chart) {
+            chart.style.width = `${window.innerWidth * 0.8}px`;
+            chart.style.height = `${window.innerHeight * 0.5}px`;
+        }
+    });
+</script>
 
 </html>

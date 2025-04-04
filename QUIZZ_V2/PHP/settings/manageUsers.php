@@ -4,10 +4,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../../config.php';
+include '../menu.php';
 
 // Vérifier si l'utilisateur est authentifié et Administrateur
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['status'] !== 'Administrator') {
-    header("Location: ../../login.php");
+    header("Location: ../../../login.php");
     exit();
 }
 
@@ -111,6 +112,7 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Gestion des utilisateurs</title>
     <link rel="stylesheet" href="../../CSS/manageAdmin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -158,9 +160,6 @@ $conn->close();
         </tbody>
     </table>
     <br>
-    <div class="back-home">
-        <a href="<?= $is_admin ? '../homeAdmin.php' : '../homeUser.php' ?>" class="btn btn-secondary">Menu</a>
-    </div>
 
 </body>
 

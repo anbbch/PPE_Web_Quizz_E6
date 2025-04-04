@@ -6,6 +6,7 @@ define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'anya');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'quizz');
+define('URL', '/QUIZZ_V2 - Copie/');
 
 function getDbConnection()
 {
