@@ -1,6 +1,8 @@
 body {
     background-color: #674d3911 !important;
     margin: 0; /* Supprimer les marges par défaut */
+    /* display: flex; */
+    overflow-y: none;
 }
 
 .conteneur img {
@@ -8,7 +10,7 @@ body {
     top: 5px;
     left: 30px;
     max-width: 10%;
-    max-height: 80%;
+    max-height: 50%;
     border-radius: 15px;
     object-fit: contain;
     mix-blend-mode: multiply;
@@ -93,29 +95,25 @@ body {
     border: 1px solid #fff;
 }
 
-/* Style du conteneur du bouton */
-.back-home {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-/* Style du bouton */
-.back-home a.btn {
-    padding: 10px 20px;
-    border: none;
-    background-color: #4e4c4c; /* Couleur de fond */
-    color: #fff; /* Couleur du texte */
-    font-size: 16px; /* Taille du texte */
-    border-radius: 5px; /* Bordures arrondies */
-    text-decoration: none; /* Supprimer le soulignement du lien */
-}
-
-/* Style au survol du bouton */
-.back-home a.btn:hover {
-    background-color: #454343; /* Changement de couleur de fond au survol */
-    cursor: pointer; /* Curseur de la souris en main */
-}
+@media (max-width: 868px) {
+    .logout-container {
+      margin-top: auto;
+    }
+  
+    .disconnect-btn {
+      width: 100%;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+  
+    .disconnect-btn:hover {
+      color: white;
+      border: 1px solid #fff;
+    }
+  }
 
 #small{
     text-align: center;

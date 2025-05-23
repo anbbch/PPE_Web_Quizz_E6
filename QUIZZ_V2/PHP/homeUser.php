@@ -25,11 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
 }
 
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
 if ($conn->connect_error) {
   die("Échec de la connexion : " . $conn->connect_error);
 }
 
-$sql = "SELECT id, name FROM thème";
+$sql = "SELECT id, name FROM `thème`";
+if (!$result = $conn->query($sql)) {
+  die("Erreur SQL : " . $conn->error);
+}
+
 $result = $conn->query($sql);
 $themes = $result->fetch_all(MYSQLI_ASSOC);
 $conn->close();

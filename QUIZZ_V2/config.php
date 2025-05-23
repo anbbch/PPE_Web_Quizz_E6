@@ -1,12 +1,21 @@
 <?php
 session_start();
 
-// Définir les paramètres de configuration
+//Définir les paramètres de configuration locale:
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'anya');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'quizz');
-define('URL', '/QUIZZ_V2 - Copie/');
+
+
+//Connexion distance :
+
+// define('DB_SERVER', '104.40.137.99:22260');
+// define('DB_USERNAME', 'developer');
+// define('DB_PASSWORD', 'cerfal1313');
+// define('DB_NAME', 'belletable_anya');
+
+define('URL', '/QUIZZ_V2/');
 
 function getDbConnection()
 {

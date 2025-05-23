@@ -3,14 +3,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../config.php';
-include 'menu.php';
+require_once '../../config.php';
+include '../menu.php';
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
+$user_id = $_SESSION['id']; // Assurez-vous que l'ID de l'utilisateur est stocké dans la session
+$username = $_SESSION['username']; // Assurez-vous que le nom d'utilisateur est dans la session
 $is_admin = isset($_SESSION['status']) && $_SESSION['status'] === 'Administrator';
 
 if (!$is_admin) {
@@ -30,43 +32,19 @@ if ($conn->connect_error) {
     die("Échec de la connexion : " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_theme'])) {
-    $theme_name = trim($_POST['theme_name']);
-    if (!empty($theme_name)) {
-        $stmt = $conn->prepare("INSERT INTO thème (name) VALUES (?)");
-        $stmt->bind_param("s", $theme_name);
-        $stmt->execute();
-        $stmt->close();
-        echo "<script>alert('Thème ajouté avec succès.'); window.location.href = 'homeAdmin.php';</script>";
-    }
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_theme'])) {
-    $theme_id = intval($_POST['theme_id']);
-    $stmt = $conn->prepare("DELETE FROM thème WHERE id = ?");
-    $stmt->bind_param("i", $theme_id);
-    $stmt->execute();
-    $stmt->close();
-    echo "<script>alert('Thème supprimé.'); window.location.href = 'homeAdmin.php';</script>";
-}
-
-$sql = "SELECT id, name FROM thème";
-$result = $conn->query($sql);
-$themes = $result->fetch_all(MYSQLI_ASSOC);
-
-
-
-// Récupération des scores cumulés par groupe et date
-global $conn;
-$scoreParGroupe = [];
-$sql = "SELECT g.name AS group_name, DATE(h.date_reponse) as date_reponse, SUM(h.score) AS total_score 
+// Exemple pour récupérer les scores cumulés par groupe et date
+$sql = "SELECT g.name AS group_name, DATE(h.date_reponse) as date_reponse, SUM(h.score) AS total_score
         FROM historiqueUtilisateur h
         JOIN users u ON h.user_id = u.id
         JOIN groupes g ON u.groupes_id = g.id
-        WHERE DATE(h.date_reponse) >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+        WHERE h.user_id = ? AND DATE(h.date_reponse) >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
         GROUP BY g.name, DATE(h.date_reponse)
         ORDER BY DATE(h.date_reponse) ASC";
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id); // Assurez-vous que user_id est un entier
+$stmt->execute();
+$result = $stmt->get_result();
+
 while ($row = $result->fetch_assoc()) {
     $scoreParGroupe[$row['group_name']][] = [
         'date_reponse' => $row['date_reponse'],
@@ -81,18 +59,19 @@ $sql = "SELECT q.libelle, g.name AS group_name, AVG(h.score) AS avg_score
         JOIN users u ON h.user_id = u.id
         JOIN groupes g ON u.groupes_id = g.id
         JOIN questionnaire q ON h.questionnaire_id = q.id
+        WHERE u.id = $user_id
         GROUP BY q.libelle, g.name
         ORDER BY avg_score DESC LIMIT 5";
 $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     $topQuestionnaires[] = $row;
 }
-
-// Récupération des 3 meilleurs utilisateurs
+// Récupérer les 3 meilleurs utilisateurs du même groupe
 $topUsers = [];
 $sql = "SELECT u.username, SUM(h.score) AS total_score
         FROM historiqueUtilisateur h
         JOIN users u ON h.user_id = u.id
+        WHERE u.groupes_id = (SELECT groupes_id FROM users WHERE id = $user_id)
         GROUP BY u.id
         ORDER BY total_score DESC LIMIT 5";
 $result = $conn->query($sql);
@@ -111,23 +90,22 @@ $conn->close();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../CSS/homeAdmin.css">
-    <title>Dashboard Admin</title>
-
+    <link rel="stylesheet" href="../../CSS/homeAdmin.css">
+    <title>Tableau de bord Admin</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <div class="container mt-4">
-        <h1 class="text-center mb-4">Tableau de bord Admin</h1>
+        <h1 class="text-center mb-4">Bonjour, <?= htmlspecialchars($username) ?> !</h1>
 
         <div class="row">
-            <!-- Progression des Scores -->
+            <!-- Progression des Scores  de l'utilisateur par rapport a son groupe -->
             <div class="col-lg-6 mb-4">
                 <div class="card shadow">
                     <div class="card-header bg-brown text-white">
-                        <h4>Progression des Scores par Groupe</h4>
+                        <h4>Progression des Scores de <?= htmlspecialchars($username) ?> par Groupe</h4>
                     </div>
                     <div class="card-body">
                         <canvas id="scoreChart"></canvas>
@@ -135,11 +113,11 @@ $conn->close();
                 </div>
             </div>
 
-            <!-- Top Questionnaires -->
+            <!-- Top Questionnaires de l'utilisateur-->
             <div class="col-lg-6 mb-4">
                 <div class="card shadow">
                     <div class="card-header bg-brown text-white">
-                        <h4>Top Questionnaires par Groupe</h4>
+                        <h4>Top Questionnaires pour <?= htmlspecialchars($username) ?> par Groupe</h4>
                     </div>
                     <div class="card-body">
                         <canvas id="quizChart"></canvas>
@@ -147,11 +125,11 @@ $conn->close();
                 </div>
             </div>
 
-            <!-- Top 3 Utilisateurs -->
+            <!-- Top 5 Utilisateurs de son groupe-->
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-header bg-brown text-white">
-                        <h4>Top 3 Utilisateurs</h4>
+                        <h4>Top 3 Utilisateurs de votre Groupe</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
@@ -166,29 +144,6 @@ $conn->close();
                 </div>
             </div>
 
-            <!-- Gestion des Thèmes -->
-            <div class="col-md-6">
-                <div class="card shadow">
-                    <div class="card-header bg-brown text-white">
-                        <h4>Gestion des Thèmes</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="list-group">
-                            <?php foreach ($themes as $theme): ?>
-                                <div class="theme-item d-flex justify-content-between align-items-center">
-                                    <button class="subject-button" onclick="window.location.href='questionnaire.php?theme=<?= $theme['id'] ?>'">
-                                        <?= htmlspecialchars($theme['name']) ?>
-                                    </button>
-                                    <form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce thème ?');">
-                                        <input type="hidden" name="theme_id" value="<?= $theme['id'] ?>">
-                                        <button type="submit" name="delete_theme" class="delete-button btn btn-danger">Supprimer</button>
-                                    </form>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -251,7 +206,6 @@ $conn->close();
             }
         });
     });
-
 
     window.addEventListener('resize', function() {
         const chart = document.getElementById('quizChart');
