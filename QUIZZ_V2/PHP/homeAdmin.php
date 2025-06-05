@@ -199,9 +199,9 @@ $conn->close();
         </div>
     </div>
 <?php 
-echo '<pre>';
-print_r($scoreParGroupe);
-echo '</pre>';
+// echo '<pre>';
+// print_r($scoreParGroupe);
+// echo '</pre>';
 ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
