@@ -3,7 +3,7 @@ require_once '../../config.php';
 include '../menu.php';
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../../../login.php");
+    header("Location: " . URL . 'login.php');
     exit();
 }
 
@@ -26,8 +26,8 @@ if ($conn->connect_error) {
 $users = [];
 if ($is_admin) {
     $sql_users = "SELECT DISTINCT u.id, u.username, u.name 
-                  FROM users u
-                  JOIN historiqueUtilisateur h ON u.id = h.user_id";
+                FROM users u 
+                JOIN historiqueUtilisateur h ON u.id = h.user_id";
     $result_users = $conn->query($sql_users);
     while ($row = $result_users->fetch_assoc()) {
         $users[] = $row;
@@ -44,7 +44,7 @@ if ($is_admin && isset($_POST['selected_user'])) {
 $sql = "
     SELECT h.id, h.questionnaire_id, h.date_reponse, q.libelle AS questionnaire_nom, 
            h.question, h.bonne_reponse, h.reponse,  h.score
-    FROM historiqueutilisateur h
+    FROM historiqueUtilisateur h
     JOIN questionnaire q ON h.questionnaire_id = q.id
     WHERE h.user_id = ?
     ORDER BY h.date_reponse DESC

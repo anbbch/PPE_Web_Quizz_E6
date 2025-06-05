@@ -7,7 +7,7 @@ require_once '../config.php';
 
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-  header("Location: ../login.php");
+  header("Location: " . URL . 'login.php');
   exit();
 }
 
@@ -30,7 +30,7 @@ if ($conn->connect_error) {
   die("Échec de la connexion : " . $conn->connect_error);
 }
 
-$sql = "SELECT id, name FROM `thème`";
+$sql = "SELECT id, name FROM `theme`";
 if (!$result = $conn->query($sql)) {
   die("Erreur SQL : " . $conn->error);
 }

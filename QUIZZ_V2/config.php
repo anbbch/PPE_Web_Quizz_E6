@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-//Définir les paramètres de configuration locale:
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'anya');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'quizz');
+// //Définir les paramètres de configuration locale:
+// define('DB_SERVER', 'localhost');
+// define('DB_USERNAME', 'anya');
+// define('DB_PASSWORD', '');
+// define('DB_NAME', 'quizz');
 
 
 //Connexion distance :
@@ -14,6 +14,11 @@ define('DB_NAME', 'quizz');
 // define('DB_USERNAME', 'developer');
 // define('DB_PASSWORD', 'cerfal1313');
 // define('DB_NAME', 'belletable_anya');
+
+define('DB_SERVER', 'gtc.boubchir.eu');
+define('DB_USERNAME', 'juryBTS');
+define('DB_PASSWORD', '!5Y;H4w*j4rHv4');
+define('DB_NAME', 'quizz_anya');
 
 define('URL', '/QUIZZ_V2/');
 

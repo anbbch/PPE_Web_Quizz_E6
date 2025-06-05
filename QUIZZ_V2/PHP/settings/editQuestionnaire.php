@@ -8,7 +8,7 @@ include '../menu.php';
 
 // Vérifier si l'utilisateur est authentifié et administrateur
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['status'] !== 'Administrator') {
-    header("Location: ../login.php");
+    header("Location: " . URL . 'login.php');
     exit();
 }
 
@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les questionnaires
-$sql = "SELECT id, name FROM thème"; // La table contenant les thèmes des questionnaires
+$sql = "SELECT id, name FROM theme"; // La table contenant les thèmes des questionnaires
 $result = $conn->query($sql);
 
 $questionnaires = [];

@@ -11,6 +11,12 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     exit();
 }
 
+// Si le mot de passe est expiré, on redirige vers changepassword
+if (isset($_SESSION['force_pwd_change']) && $_SESSION['force_pwd_change'] === true && basename($_SERVER['PHP_SELF']) !== 'changepassword.php') {
+    header("Location: settings/Users/changePassword.php");
+    exit();
+}
+
 $is_admin = isset($_SESSION['status']) && $_SESSION['status'] === 'Administrator';
 
 if (!$is_admin) {
@@ -33,7 +39,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_theme'])) {
     $theme_name = trim($_POST['theme_name']);
     if (!empty($theme_name)) {
-        $stmt = $conn->prepare("INSERT INTO thème (name) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO theme (name) VALUES (?)");
         $stmt->bind_param("s", $theme_name);
         $stmt->execute();
         $stmt->close();
@@ -43,14 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_theme'])) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_theme'])) {
     $theme_id = intval($_POST['theme_id']);
-    $stmt = $conn->prepare("DELETE FROM thème WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM theme WHERE id = ?");
     $stmt->bind_param("i", $theme_id);
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('Thème supprimé.'); window.location.href = 'homeAdmin.php';</script>";
 }
 
-$sql = "SELECT id, name FROM thème";
+$sql = "SELECT id, name FROM theme";
 $result = $conn->query($sql);
 $themes = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -73,6 +79,7 @@ while ($row = $result->fetch_assoc()) {
         'score' => $row['total_score']
     ];
 }
+
 
 // Récupération des questionnaires avec le meilleur taux de réussite
 $topQuestionnaires = [];
@@ -191,14 +198,22 @@ $conn->close();
             </div>
         </div>
     </div>
-
+<?php 
+echo '<pre>';
+print_r($scoreParGroupe);
+echo '</pre>';
+?>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        let scoreData = <?php echo json_encode($scoreParGroupe); ?>;
+        let scoreData = <?php echo json_encode($scoreParGroupe ?? [], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+
         let labels = [...new Set(Object.values(scoreData).flat().map(item => item.date_reponse))];
         let datasets = Object.keys(scoreData).map(group => ({
             label: group,
@@ -238,7 +253,8 @@ $conn->close();
             }
         });
 
-        let quizData = <?php echo json_encode($topQuestionnaires); ?>;
+        let quizData = <?php echo json_encode($topQuestionnaires ?? [], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+
         new Chart(document.getElementById("quizChart"), {
             type: 'bar',
             data: {
