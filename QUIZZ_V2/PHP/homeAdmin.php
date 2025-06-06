@@ -112,7 +112,7 @@ while ($row = $result->fetch_assoc()) {
 
 
 $conn->close();
-var_dump($themes);
+//var_dump($themes);
 ?>
 
 <!DOCTYPE html>
