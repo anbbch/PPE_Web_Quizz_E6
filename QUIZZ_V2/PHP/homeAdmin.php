@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -106,7 +109,10 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     $topUsers[] = $row;
 }
+
+
 $conn->close();
+var_dump($themes);
 ?>
 
 <!DOCTYPE html>

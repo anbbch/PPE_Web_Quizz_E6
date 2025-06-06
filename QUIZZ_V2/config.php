@@ -10,15 +10,26 @@ session_start();
 
 //Connexion distance :
 
+//MySQLWorkbench CFA:
+
 // define('DB_SERVER', '104.40.137.99:22260');
 // define('DB_USERNAME', 'developer');
 // define('DB_PASSWORD', 'cerfal1313');
 // define('DB_NAME', 'belletable_anya');
 
-define('DB_SERVER', 'gtc.boubchir.eu');
-define('DB_USERNAME', 'juryBTS');
-define('DB_PASSWORD', '!5Y;H4w*j4rHv4');
-define('DB_NAME', 'quizz_anya');
+//PHPMyAdmin Anya:
+
+// define('DB_SERVER', 'gtc.boubchir.eu');
+// define('DB_USERNAME', 'juryBTS');
+// define('DB_PASSWORD', '!5Y;H4w*j4rHv4');
+// define('DB_NAME', 'quizz_anya');
+
+//PHPMyAdmin Alexis:
+
+define('DB_SERVER', 'db-fde-02.sparkedhost.us:3306');
+define('DB_USERNAME', 'u79805_x7JaJKQqb9');
+define('DB_PASSWORD', 'rmHi03H0=BaOL96Y.XRmPNkY');
+define('DB_NAME', 's79805_BTSSIO_ANYA');
 
 define('URL', '/QUIZZ_V2/');
 
