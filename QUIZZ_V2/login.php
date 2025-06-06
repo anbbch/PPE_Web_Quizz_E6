@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['id'] = $user_id; // Stocker l'ID de l'utilisateur
 
 
-            var_dump($_COOKIE);
+            //var_dump($_COOKIE);
 
             // Redirect to the home page
             header("Location: PHP/homeUser.php");

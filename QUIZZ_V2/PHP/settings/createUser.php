@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // create_user.php
 require_once '../../config.php';
-include '../menu.php';
+//include '../menu.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="back-home">
-        <a href="../../home.php" class="btn btn-secondary">Menu</a>
+        <a href="<?= URL . ('login.php') ?>" class="btn btn-secondary"> Login </a>
     </div>
 </body>
 

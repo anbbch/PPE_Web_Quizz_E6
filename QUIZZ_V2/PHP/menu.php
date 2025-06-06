@@ -40,14 +40,17 @@ $is_admin = isset($_SESSION['status']) && $_SESSION['status'] === 'Administrator
                     <li class="nav-item">
                         <a class="nav-link" href="<?= URL . ('PHP/settings/manageUsers.php') ?>">Gérer les utilisateurs</a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="<?= URL . ('PHP/settings/Users/avis.php') ?>">Avis utilisateurs</a>
+                    </li>-->
+                    <!--<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Statistiques
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="<?= URL . ('PHP/stats/stats_groupe.php') ?>">Statistiques 1</a></li>
                             <li><a class="dropdown-item" href="stats2.php">Statistiques 2</a></li>
-                        </ul> 
+                        </ul>
                     </li>-->
                 <?php endif; ?>
 
